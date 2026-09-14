@@ -1,0 +1,182 @@
+/* Envelope styles with authentic paper texture, embossed floral patterns and 3D flaps */
+
+.envelope-viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF4E6;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(255, 253, 248, 0.95), rgba(250, 244, 230, 0.95)),
+    url('/invitation/paper-texture.webp');
+  background-blend-mode: overlay;
+  background-size: cover;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+.envelope-stage {
+  position: relative;
+  width: min(390px, 92vw);
+  height: min(540px, 78vh);
+  max-width: 430px;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 25px 35px rgba(117, 102, 95, 0.22))
+          drop-shadow(0 8px 12px rgba(122, 24, 48, 0.08));
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: #F6EFE0;
+  box-shadow: inset 0 0 25px rgba(185, 146, 69, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #F3ECE0 0%, #E8DEC9 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(185, 146, 69, 0.25);
+  box-shadow: inset 0 2px 8px rgba(117, 102, 95, 0.15);
+}
+
+/* Embossed floral watermark on ivory paper */
+.paper-emboss {
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 253, 248, 0.7) 0%, transparent 80%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B99245' fill-opacity='0.05'%3E%3Cpath d='M40 20c-5-8-15-8-15 0 0 10 15 20 15 20s15-10 15-20c0-8-10-8-15 0zM20 40c-8-5-8-15 0-15 10 0 20 15 20 15s-10 15-20 15c-8 0-8-10 0-15zM60 40c8-5 8-15 0-15-10 0-20 15-20 15s10 15 20 15c8 0 8-10 0-15zM40 60c-5 8-15 8-15 0 0-10 15-20 15-20s15 10 15 20c0 8-10 8-15 0z'/%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.envelope-letter {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  border-radius: 10px;
+  background: #FFFDF8;
+  border: 1px solid rgba(185, 146, 69, 0.3);
+  box-shadow: 0 4px 20px rgba(117, 102, 95, 0.14),
+              inset 0 0 25px rgba(250, 244, 230, 0.8);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+/* Flaps styling */
+.envelope-left-flap {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0% 0%, 53% 51%, 0% 100%);
+  background: linear-gradient(135deg, #FAF4E6 0%, #EFE5CE 100%);
+  filter: drop-shadow(2px 0 4px rgba(117, 102, 95, 0.12));
+  z-index: 3;
+  transform-origin: left center;
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.envelope-right-flap {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(100% 0%, 47% 51%, 100% 100%);
+  background: linear-gradient(225deg, #FAF4E6 0%, #EFE5CE 100%);
+  filter: drop-shadow(-2px 0 4px rgba(117, 102, 95, 0.12));
+  z-index: 3;
+  transform-origin: right center;
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.envelope-bottom-flap {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0% 100%, 50% 48%, 100% 100%);
+  background: linear-gradient(0deg, #F5EBDA 0%, #EDE0C6 100%);
+  filter: drop-shadow(0 -2px 6px rgba(117, 102, 95, 0.14));
+  z-index: 4;
+  transform-origin: bottom center;
+}
+
+.envelope-top-flap {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0% 0%, 50% 54%, 100% 0%);
+  background: linear-gradient(180deg, #FFFDF8 0%, #EAE0C7 100%);
+  filter: drop-shadow(0 6px 10px rgba(117, 102, 95, 0.22));
+  z-index: 5;
+  transform-origin: top center;
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Wax Seal */
+.wax-seal-wrapper {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wax-seal {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #9B233D 0%, #7A1830 55%, #4E0D1D 100%);
+  box-shadow: 
+    0 8px 18px rgba(78, 13, 29, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 2px 4px rgba(255, 255, 255, 0.25),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.wax-seal::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px dashed rgba(185, 146, 69, 0.55);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.wax-seal:hover {
+  transform: scale(1.06);
+  box-shadow: 
+    0 12px 24px rgba(78, 13, 29, 0.6),
+    0 0 20px rgba(185, 146, 69, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35);
+}
+
+/* Warm glow emerging from behind envelope */
+.warm-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 236, 179, 0.85) 0%, rgba(250, 215, 130, 0.4) 40%, rgba(250, 244, 230, 0) 70%);
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(12px);
+}

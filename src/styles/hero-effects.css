@@ -1,0 +1,60 @@
+/* Romantic Hero Swan and Falling Rose Petals Animations */
+
+@keyframes swanFloatLeft {
+  0% {
+    transform: translate3d(-4px, 0px, 0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translate3d(3px, -3px, 0) rotate(0.5deg);
+  }
+  100% {
+    transform: translate3d(-4px, 0px, 0) rotate(-0.5deg);
+  }
+}
+
+@keyframes swanFloatRight {
+  0% {
+    transform: translate3d(4px, 0px, 0) rotate(0.5deg);
+  }
+  50% {
+    transform: translate3d(-3px, -3px, 0) rotate(-0.5deg);
+  }
+  100% {
+    transform: translate3d(4px, 0px, 0) rotate(0.5deg);
+  }
+}
+
+.swan-left-anim {
+  animation: swanFloatLeft 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.swan-right-anim {
+  animation: swanFloatRight 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Water ripple under swans */
+@keyframes waterRipple {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.08, 0.95) translate3d(0, 1px, 0);
+    opacity: 0.15;
+  }
+}
+
+.water-ripple-anim {
+  animation: waterRipple 5.5s ease-in-out infinite;
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .swan-left-anim,
+  .swan-right-anim,
+  .water-ripple-anim {
+    animation: none !important;
+  }
+}

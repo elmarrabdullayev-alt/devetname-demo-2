@@ -1,0 +1,107 @@
+/* Wedding Invitation Custom Styles */
+
+:root {
+  --color-cream: #FAF4E6;
+  --color-warm-white: #FFFDF8;
+  --color-antique-gold: #B99245;
+  --color-burgundy: #7A1830;
+  --color-taupe: #75665F;
+}
+
+.font-great-vibes {
+  font-family: 'Great Vibes', cursive, serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-manrope {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Torn paper divider edge */
+.torn-paper-edge-top {
+  position: relative;
+  background-color: #FAF4E6;
+}
+
+.torn-edge-svg {
+  width: 100%;
+  height: 24px;
+  display: block;
+  fill: #FAF4E6;
+}
+
+.torn-edge-svg-inverted {
+  width: 100%;
+  height: 24px;
+  display: block;
+  fill: #FFFDF8;
+}
+
+/* Gold foil border styling */
+.gold-frame-border {
+  border: 1px solid rgba(185, 146, 69, 0.35);
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7),
+    inset 0 0 18px rgba(185, 146, 69, 0.08),
+    0 10px 25px rgba(117, 102, 95, 0.07);
+}
+
+.gold-inner-corner {
+  position: relative;
+}
+
+.gold-inner-corner::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(185, 146, 69, 0.22);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Ambient glow & soft luxury shadows */
+.shadow-luxury {
+  box-shadow: 0 15px 35px -5px rgba(117, 102, 95, 0.12),
+              0 8px 16px -6px rgba(122, 24, 48, 0.06);
+}
+
+.wax-seal-button {
+  background: radial-gradient(circle at 35% 30%, #9E243E 0%, #7A1830 55%, #4A0B1A 100%);
+  box-shadow: 
+    0 8px 20px rgba(122, 24, 48, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 2px 3px rgba(255, 255, 255, 0.28),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.wax-seal-button:active {
+  transform: scale(0.95);
+}
+
+/* Scroll bounce indicator */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 2.4s ease-in-out infinite;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

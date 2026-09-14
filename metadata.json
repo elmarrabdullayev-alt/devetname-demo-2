@@ -1,0 +1,6 @@
+{
+  "name": "Nigar & Ali Toy Dəvətnaməsi",
+  "description": "Nigar & Ali cütlüyünün romantik və premium mobil toy dəvətnaməsi",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
