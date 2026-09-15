@@ -66,6 +66,8 @@ export interface InvitationConfig {
     venue: string;
     couple: string;
     music: string;
+    heroMotionVideo: string;
+    heroPoster: string;
   };
 }
 
@@ -162,5 +164,7 @@ export const invitationConfig: InvitationConfig = {
     venue: '/invitation/venue.webp',
     couple: '/invitation/couple.webp',
     music: '/invitation/music.mp3',
+    heroMotionVideo: '/invitation/hero-motion.mp4',
+    heroPoster: '/invitation/hero-poster.webp',
   },
 };

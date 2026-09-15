@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX, Music } from 'lucide-react';
 import { invitationConfig } from '../config/invitation.ts';
+import { motion } from 'motion/react';
 
 interface MusicControlProps {
   shouldStart?: boolean;
+  isIntroComplete?: boolean;
 }
 
-export const MusicControl: React.FC<MusicControlProps> = ({ shouldStart }) => {
+export const MusicControl: React.FC<MusicControlProps> = ({ 
+  shouldStart,
+  isIntroComplete = false,
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -63,9 +68,13 @@ export const MusicControl: React.FC<MusicControlProps> = ({ shouldStart }) => {
   };
 
   return (
-    <div
+    <motion.div
       id="music-control"
       className="fixed bottom-5 right-4 sm:right-[max(1rem,calc(50%-200px))] z-[20] select-none"
+      initial={{ opacity: 0, y: 18 }}
+      animate={isIntroComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+      transition={{ duration: 0.9, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+      style={{ pointerEvents: isIntroComplete ? 'auto' : 'none' }}
     >
       <button
         onClick={togglePlay}
@@ -88,6 +97,6 @@ export const MusicControl: React.FC<MusicControlProps> = ({ shouldStart }) => {
           <VolumeX className="w-5 h-5 text-[#FAF4E6]/80" />
         )}
       </button>
-    </div>
+    </motion.div>
   );
 };

@@ -1,0 +1,120 @@
+/* Envelope Intro Styles (MP4-based seamless transition) */
+
+.animated-intro-viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF4E6;
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+}
+
+/* Ambient background on desktop */
+.animated-intro-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.animated-intro-ambient-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(35px);
+  transform: scale(1.12);
+  opacity: 0.20;
+}
+
+.animated-intro-ambient-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(250, 248, 243, 0.55);
+}
+
+/* Main intro card container: mobile-first, max-width 480px on desktop */
+.animated-intro-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 100dvh;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  z-index: 1;
+  background-color: #FAF4E6;
+  box-shadow: 0 20px 70px rgba(68, 48, 39, 0.12);
+}
+
+/* Base image & video styling ensuring consistent 100% cover and center alignment */
+.intro-media-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Fullscreen transparent touch trigger button */
+.animated-intro-tap-area {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  z-index: 20;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Subtly refined, non-button text prompt near bottom */
+.animated-intro-prompt-text {
+  margin-bottom: clamp(48px, 12vh, 96px);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #7A1830;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: inherit;
+  pointer-events: none;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+  opacity: 0.85;
+}
+
+.animated-intro-prompt-text.fade-out {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+/* Fallback message container if needed */
+.animated-intro-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF4E6;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EnvelopeIntro } from './components/EnvelopeIntro.tsx';
+import { EnvelopeAnimatedIntro } from './components/EnvelopeAnimatedIntro.tsx';
 import { InvitationHero } from './components/InvitationHero.tsx';
 import { Countdown } from './components/Countdown.tsx';
 import { EventTimeline } from './components/EventTimeline.tsx';
@@ -13,6 +13,7 @@ import { Sparkles, Gift, Shirt } from 'lucide-react';
 export default function App() {
   const [musicTriggered, setMusicTriggered] = useState(false);
   const [introFinished, setIntroFinished] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const [isRSVPOpen, setIsRSVPOpen] = useState(false);
 
   const handleEnvelopeOpen = () => {
@@ -25,25 +26,46 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EFE5D1] py-0 sm:py-6 flex justify-center items-start selection:bg-[#B99245]/20 selection:text-[#7A1830]">
-      {/* Interactive 3D Envelope Intro Layer with Shared-Element Transition */}
-      <EnvelopeIntro
+    <div className="min-h-screen bg-[#EFE5D1] py-0 sm:py-6 flex justify-center items-start selection:bg-[#B99245]/20 selection:text-[#7A1830] relative overflow-x-hidden">
+      {/* 
+        1 & 2. Viewport Ambient Background for Desktop:
+        - Bütün viewport-u örtür
+        - hero-poster.webp, cover, blur(35px), scale(1.12), opacity: 0.20
+        - Üzərində krem rəngli rgba(250,248,243,0.55) qat
+        - 480px və daha kiçik telefonlarda avtomatik gizlədilir
+      */}
+      <div
+        id="viewport-ambient-background"
+        className="ambient-background"
+        aria-hidden="true"
+      >
+        <div className="ambient-poster-image" />
+        <div className="ambient-tint-overlay" />
+      </div>
+
+      {/* Animated WebP Envelope Intro Layer */}
+      <EnvelopeAnimatedIntro
+        isVideoReady={isVideoReady}
         onOpen={handleEnvelopeOpen}
         onAnimationComplete={handleAnimationComplete}
       />
 
-      {/* Main Invitation Container: Mobile-First, max 430px */}
+      {/* Main Invitation Container (invitation-shell): Mobile-First, max 430px */}
       <main
-        id="wedding-invitation-container"
-        className="w-full max-w-[430px] min-h-screen bg-[#FAF4E6] relative shadow-2xl overflow-x-hidden"
+        id="invitation-shell"
+        className="invitation-shell w-full max-w-[430px] min-h-screen bg-[#FAF4E6] relative z-10 overflow-x-hidden"
         style={{
+          boxShadow: '0 20px 70px rgba(68, 48, 39, 0.12)',
           backgroundImage: `radial-gradient(circle at 50% 0%, rgba(255, 253, 248, 0.7), rgba(250, 244, 230, 0.95)), url('${invitationConfig.assets.paperTexture}')`,
           backgroundBlendMode: 'overlay',
           backgroundSize: '300px 300px',
         }}
       >
         {/* 1. Hero Section (100svh) with Sequential Text Fade-Up */}
-        <InvitationHero isIntroComplete={introFinished} />
+        <InvitationHero 
+          isIntroComplete={introFinished}
+          onVideoReady={() => setIsVideoReady(true)}
+        />
 
         {/* Cırılmış kağız keçidi (Torn Paper Edge Divider) */}
         <div className="relative w-full -mt-4 z-20 overflow-hidden leading-none pointer-events-none">
@@ -315,7 +337,7 @@ export default function App() {
         </section>
 
         {/* Fixed Music Player Control */}
-        <MusicControl shouldStart={musicTriggered} />
+        <MusicControl shouldStart={musicTriggered} isIntroComplete={introFinished} />
 
         {/* RSVP Modal Dialog */}
         <RSVPModal isOpen={isRSVPOpen} onClose={() => setIsRSVPOpen(false)} />

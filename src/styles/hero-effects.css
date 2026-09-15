@@ -1,60 +1,122 @@
-/* Romantic Hero Swan and Falling Rose Petals Animations */
+/* Hero Effects & Gentle Transitions */
 
-@keyframes swanFloatLeft {
-  0% {
-    transform: translate3d(-4px, 0px, 0) rotate(-0.5deg);
-  }
-  50% {
-    transform: translate3d(3px, -3px, 0) rotate(0.5deg);
-  }
-  100% {
-    transform: translate3d(-4px, 0px, 0) rotate(-0.5deg);
-  }
-}
-
-@keyframes swanFloatRight {
-  0% {
-    transform: translate3d(4px, 0px, 0) rotate(0.5deg);
-  }
-  50% {
-    transform: translate3d(-3px, -3px, 0) rotate(-0.5deg);
-  }
-  100% {
-    transform: translate3d(4px, 0px, 0) rotate(0.5deg);
-  }
-}
-
-.swan-left-anim {
-  animation: swanFloatLeft 7s ease-in-out infinite;
-  will-change: transform;
-}
-
-.swan-right-anim {
-  animation: swanFloatRight 7s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* Water ripple under swans */
-@keyframes waterRipple {
+@keyframes gentlePulse {
   0%, 100% {
-    transform: scale(1) translate3d(0, 0, 0);
-    opacity: 0.25;
+    opacity: 0.6;
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.08, 0.95) translate3d(0, 1px, 0);
-    opacity: 0.15;
+    opacity: 0.9;
+    transform: scale(1.03);
   }
 }
 
-.water-ripple-anim {
-  animation: waterRipple 5.5s ease-in-out infinite;
+.hero-gentle-pulse {
+  animation: gentlePulse 4s ease-in-out infinite;
 }
 
-/* Reduced motion overrides */
 @media (prefers-reduced-motion: reduce) {
-  .swan-left-anim,
-  .swan-right-anim,
-  .water-ripple-anim {
+  .hero-gentle-pulse {
     animation: none !important;
+  }
+}
+
+/* 
+  1 & 2. Ambient Background Layer
+  Uses hero-poster.webp, cover, blur(35px), scale(1.12), opacity: 0.20,
+  with cream rgba(250, 248, 243, 0.55) tint on top.
+*/
+.ambient-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#viewport-ambient-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.ambient-poster-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/invitation/hero-poster.webp');
+  background-size: cover;
+  background-position: center;
+  filter: blur(35px);
+  transform: scale(1.12);
+  opacity: 0.20;
+}
+
+.ambient-tint-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(250, 248, 243, 0.55);
+}
+
+/* 
+  3, 4, 11. Hero Background Layer Mask (Video/Poster)
+  Keeps the center sharp while applying 18-28px soft gradient fade at left & right.
+  Includes -webkit-mask-image for Safari support.
+*/
+.hero-background-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* 
+  6 & 7. Invitation Shell on Desktop
+  Very soft shadow, no border, no sharp lines
+*/
+.invitation-shell {
+  box-shadow: 0 20px 70px rgba(68, 48, 39, 0.12);
+  border: none !important;
+  outline: none !important;
+}
+
+/* 
+  8. Mobile Responsiveness (<= 480px)
+  On mobile devices where the invitation fills the entire screen,
+  turn off the side mask and hide ambient backgrounds.
+*/
+@media (max-width: 480px) {
+  .hero-background-layer {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .ambient-background,
+  #viewport-ambient-background {
+    display: none !important;
+  }
+
+  .invitation-shell {
+    box-shadow: none !important;
   }
 }
